@@ -12,8 +12,8 @@ CANVAS_HEIGHT = canvas.height = 1000;
 class Enemy {
     // mandatory constructor method for JS classes
     constructor(){
-        this.x = 10;
-        this.y = 50;
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
         this.width = 100;
         this.height = 100;
     }
