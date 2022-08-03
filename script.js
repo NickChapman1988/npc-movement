@@ -32,13 +32,15 @@ class Enemy {
         this.height = this.spriteHeight / 2.5;
         // frame on sprite sheet image
         this.frame = 0;
+        // randomise animation frequency
+        this.flapSpeed = Math.floor(Math.random() * 3 + 1);
     }
     update(){
         // increase x and y coordinate by speed value with each loop
         this.x += this.speed;
         this.y += this.speed;
         // cycle through sprite sheet images every two loops of main animation loop
-        if (gameFrame % 2 === 0){
+        if (gameFrame % this.flapSpeed === 0){
             // slows down flying animation
             this.frame > 4 ? this.frame = 0 : this.frame++;
         }
