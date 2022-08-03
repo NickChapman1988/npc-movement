@@ -7,6 +7,9 @@ const ctx = canvas.getContext('2d');
 const numberOfEnemies = 100;
 const enemiesArray = [];
 
+const enemyImage = new Image();
+enemyImage.src = 'media/enemy1.png';
+
 // set height and width to match values set in CSS
 CANVAS_WIDTH = canvas.width = 500;
 CANVAS_HEIGHT = canvas.height = 1000;
@@ -16,10 +19,16 @@ class Enemy {
     constructor(){
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.width = 100;
-        this.height = 100;
+        
         // random number between -2 and 2; range 0-4, -2
         this.speed = Math.random() * 4 - 2;
+        // width and height of sprite images
+        this.spriteWidth = 293;
+        this.spriteHeight = 155;
+
+        // set width and height of enemy relative to width and height of NPC image
+        this.width = this.spriteWidth / 2.5;
+        this.height = this.spriteHeight / 2.5;
     }
     update(){
         // increase x and y coordinate by speed value with each loop
@@ -28,7 +37,10 @@ class Enemy {
     }
     draw(){
         // draw enemy using properties of Enemy class
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
+        // draw image based on sprite image size, position and speed
+        ctx.drawImage(enemyImage, 0, 0, this.spriteWidth, this.spriteHeight, 
+        this.x, this.y, this.width, this.height);
     }
 }
 
