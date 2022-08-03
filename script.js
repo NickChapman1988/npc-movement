@@ -9,6 +9,7 @@ const enemiesArray = [];
 
 const enemyImage = new Image();
 enemyImage.src = 'media/enemy1.png';
+let gameFrame = 0;
 
 // set height and width to match values set in CSS
 CANVAS_WIDTH = canvas.width = 500;
@@ -36,8 +37,11 @@ class Enemy {
         // increase x and y coordinate by speed value with each loop
         this.x += this.speed;
         this.y += this.speed;
-        // cycle through sprite sheet images
-        this.frame > 4 ? this.frame = 0 : this.frame++;
+        // cycle through sprite sheet images every two loops of main animation loop
+        if (gameFrame % 2 === 0){
+            // slows down flying animation
+            this.frame > 4 ? this.frame = 0 : this.frame++;
+        }
     }
     draw(){
         // draw enemy using properties of Enemy class
@@ -71,6 +75,7 @@ function animate(){
         enemy.update();
         enemy.draw();
     })
+    gameFrame++;
     requestAnimationFrame(animate);
 }
 animate();
