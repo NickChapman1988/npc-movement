@@ -4,11 +4,9 @@
 /** @type {HTMLCanvasElement} */
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
-const numberOfEnemies = 100;
+const numberOfEnemies = 50;
 const enemiesArray = [];
 
-const enemyImage = new Image();
-enemyImage.src = 'media/enemy1.png';
 let gameFrame = 0;
 
 // set height and width to match values set in CSS
@@ -18,6 +16,8 @@ CANVAS_HEIGHT = canvas.height = 1000;
 class Enemy {
     // mandatory constructor method for JS classes
     constructor(){
+        this.image = new Image();
+        this.image.src = 'media/enemy1.png'
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         
@@ -32,7 +32,7 @@ class Enemy {
         this.height = this.spriteHeight / 2.5;
         // frame on sprite sheet image
         this.frame = 0;
-        // randomise animation frequency
+        // randomise animation frequency/timing so NPCs flap at different times
         this.flapSpeed = Math.floor(Math.random() * 3 + 1);
     }
     update(){
@@ -46,10 +46,8 @@ class Enemy {
         }
     }
     draw(){
-        // draw enemy using properties of Enemy class
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
         // draw image based on sprite image size, position and speed
-        ctx.drawImage(enemyImage, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, 
+        ctx.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, 
         this.x, this.y, this.width, this.height);
     }
 }
