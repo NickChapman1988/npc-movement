@@ -18,11 +18,13 @@ class Enemy {
         this.y = Math.random() * canvas.height;
         this.width = 100;
         this.height = 100;
+        // random number between -2 and 2; range 0-4, -2
+        this.speed = Math.random() * 4 - 2;
     }
     update(){
-        // increase x and y coordinate with each loop
-        this.x++;
-        this.y++;
+        // increase x and y coordinate by speed value with each loop
+        this.x += this.speed;
+        this.y += this.speed;
     }
     draw(){
         // draw enemy using properties of Enemy class
@@ -45,6 +47,10 @@ for (let i = 0; i < numberOfEnemies; i++){
 function animate(){
     // clear old paint!
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    /* loop through enemies array with built-in forEach method, 
+    use ES6 => function, call update() and draw() methods 
+    of Enemy class*/
     enemiesArray.forEach(enemy => {
         enemy.update();
         enemy.draw();
