@@ -16,13 +16,12 @@ CANVAS_HEIGHT = canvas.height = 1000;
 class Enemy {
     // mandatory constructor method for JS classes
     constructor(){
+        // new image for each NPC
         this.image = new Image();
-        this.image.src = 'media/enemy1.png'
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.image.src = 'media/enemy1.png'    
         
         // random number between -2 and 2; range 0-4, -2
-        this.speed = Math.random() * 4 - 2;
+        //this.speed = Math.random() * 4 - 2;
         // width and height of sprite images
         this.spriteWidth = 293;
         this.spriteHeight = 155;
@@ -30,15 +29,18 @@ class Enemy {
         // set width and height of enemy relative to width and height of NPC image
         this.width = this.spriteWidth / 2.5;
         this.height = this.spriteHeight / 2.5;
+
+        this.x = Math.random() * (canvas.width - this.width);
+        this.y = Math.random() * (canvas.height - this.height);
         // frame on sprite sheet image
         this.frame = 0;
         // randomise animation frequency/timing so NPCs flap at different times
         this.flapSpeed = Math.floor(Math.random() * 3 + 1);
     }
     update(){
-        // increase x and y coordinate by speed value with each loop
-        this.x += this.speed;
-        this.y += this.speed;
+        // increase x and y coordinate by random value with each loop to add jumpy movement
+        this.x += Math.random() * 10 - 5;
+        this.y += Math.random() * 10 - 5;
         // cycle through sprite sheet images every two loops of main animation loop
         if (gameFrame % this.flapSpeed === 0){
             // slows down flying animation
